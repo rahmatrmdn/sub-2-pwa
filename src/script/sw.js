@@ -1,14 +1,19 @@
-const { assets } = global.serviceWorkerOption
+const DEV = false
 
-const CACHE_NAME = new Date().toISOString()
+const { assets } = global.serviceWorkerOption
+let CACHE_NAME
+
+if (DEV) {
+    CACHE_NAME = new Date().toISOString()
+} else {
+    CACHE_NAME = "football-apps-v10"
+}
 
 let urlsToCache = [...assets, './']
 
 urlsToCache = urlsToCache.map(path => {
     return new URL(path, global.location).toString()
 })
-
-console.log(urlsToCache)
 
 self.addEventListener("install", function (event) {
     self.skipWaiting();

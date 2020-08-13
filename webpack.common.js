@@ -3,6 +3,8 @@ const path = require("path");
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 module.exports = {
     entry: "./src/app.js",
     output: {
@@ -25,6 +27,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: "./src/app.html",
             filename: "index.html"
@@ -35,7 +38,7 @@ module.exports = {
             chunks: ['noEntry']
         }),
         new HtmlWebpackPlugin({
-            filename: 'standing.html',
+            filename: '/pages/standing.html',
             template: './src/pages/standing.html',
             chunks: ['noEntry']
         }),
@@ -47,26 +50,44 @@ module.exports = {
             "display": "standalone",
             "background_color": "#f57c00",
             "theme_color": "#f57c00",
+            "ios": true,
+            "inject": true,
             "icons": [
                 {
                     "src": "src/assets/icon/icon-48.png",
                     "sizes": "48x48",
-                    "type": "image/png"
+                    "type": "image/png",
+                    "purpose": "any maskable",
+                    destination: path.join('icons')
                 },
                 {
                     "src": "src/assets/icon/icon-96.png",
                     "sizes": "96x96",
-                    "type": "image/png"
+                    "type": "image/png",
+                    "purpose": "any maskable",
+                    destination: path.join('icons')
+                },
+                {
+                    "src": "src/assets/icon/icon-192.png",
+                    "sizes": "512x512",
+                    "type": "image/png",
+                    "purpose": "any maskable",
+                    destination: path.join('icons')
                 },
                 {
                     "src": "src/assets/icon/icon-192.png",
                     "sizes": "192x192",
-                    "type": "image/png"
+                    "type": "image/png",
+                    "purpose": "any maskable",
+                    ios: true,
+                    destination: path.join('icons', 'ios')
                 }
             ]
         }),
         new ServiceWorkerWebpackPlugin({
-            entry: path.join(__dirname, 'src/script/sw.js')
+            entry: path.join(__dirname, 'src/script/sw.js'),
+            filename: 'service-worker.js'
         })
     ]
 }
+
