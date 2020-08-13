@@ -1,4 +1,4 @@
-import {showStanding} from "./DOM"
+import {showStanding, showTeams} from "./DOM"
 
 const API_KEY = "16d85bf702974259b17e4dff4faeade4";
 const BASE_URL = "https://api.football-data.org/v2/";
@@ -6,6 +6,7 @@ const BASE_URL = "https://api.football-data.org/v2/";
 const LEAGUE_ID = 2021;
 
 const ENDPOINT_COMPETITION = `${BASE_URL}competitions/${LEAGUE_ID}/standings`;
+const ENDPOINT_TEAMS = `${BASE_URL}competitions/${LEAGUE_ID}/teams`;
 
 const fetchAPI = url => {
     return fetch(url, {
@@ -42,6 +43,26 @@ export function getAllStandings() {
     fetchAPI(ENDPOINT_COMPETITION)
         .then(data => {
             showStanding(data);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export function getAllTeams() {
+    if ("caches" in window) {
+        caches.match(ENDPOINT_TEAMS).then(function (response) {
+            if (response) {
+                response.json().then(function (data) {
+                    showTeams(data);
+                })
+            }
+        })
+    }
+
+    fetchAPI(ENDPOINT_TEAMS)
+        .then(data => {
+            showTeams(data)
         })
         .catch(error => {
             console.log(error)

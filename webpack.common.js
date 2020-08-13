@@ -29,17 +29,23 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
+            favicon: 'src/favicon.ico',
             template: "./src/app.html",
             filename: "index.html"
         }),
         new HtmlWebpackPlugin({
             filename: 'nav.html',
-            template: './src/pages/nav.html',
+            template: './src/nav.html',
             chunks: ['noEntry']
         }),
         new HtmlWebpackPlugin({
             filename: '/pages/standing.html',
             template: './src/pages/standing.html',
+            chunks: ['noEntry']
+        }),
+        new HtmlWebpackPlugin({
+            filename: '/pages/teams.html',
+            template: './src/pages/teams.html',
             chunks: ['noEntry']
         }),
         new WebpackPwaManifest({
@@ -85,7 +91,7 @@ module.exports = {
             ]
         }),
         new ServiceWorkerWebpackPlugin({
-            entry: path.join(__dirname, 'src/script/sw.js'),
+            entry: path.join(__dirname, 'src/script/service-worker/init.js'),
             filename: 'service-worker.js'
         })
     ]

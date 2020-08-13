@@ -44,4 +44,34 @@ export function showStanding(data) {
     `;
 }
 
+export function showTeams(data) {
+
+    let teams = "";
+    let teamElement = document.getElementById("teams");
+
+    data.teams.forEach(function (team) {
+        teams += `
+             <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}" style="max-width: 15px;" alt="Team Badge"> 
+                        <span class="card-title">${team.name}</span>
+                        <a class="btn-floating halfway-fab waves-effect waves-light grey"><i
+                                class="material-icons">favorite</i></a>
+                    </div>
+                    <div class="card-content">
+                        <p>Located in ${team.address}, ${team.shortName} was founded on ${team.founded}. The avenue name is ${team.venue}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="${team.website}" target="_blank">Website</a>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+
+    teamElement.innerHTML = teams;
+}
+
+
 

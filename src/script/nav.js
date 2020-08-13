@@ -1,4 +1,4 @@
-import {getAllStandings} from "./api/data"
+import {getAllStandings, getAllTeams} from "./api/data"
 
 const nav = () => {
     document.addEventListener("DOMContentLoaded", function () {
@@ -49,7 +49,6 @@ const nav = () => {
                     const content = document.querySelector("#body-content");
                     if (this.status === 200) {
                         content.innerHTML = xhttp.responseText;
-                        getAllStandings()
                     } else if (this.status === 404) {
                         content.innerHTML = "<p>Halaman tidak ditemukan.</p>";
                     } else {
@@ -59,6 +58,13 @@ const nav = () => {
             };
             xhttp.open("GET", "pages/" + page + ".html", true);
             xhttp.send();
+
+            if (page === "standing") {
+                getAllStandings()
+            } else if (page === "teams") {
+                getAllTeams()
+            }
+
         }
     });
 }
