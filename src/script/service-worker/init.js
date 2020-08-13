@@ -9,7 +9,9 @@ if (DEV) {
     CACHE_NAME = "football-apps-v10"
 }
 
-let urlsToCache = [...assets, './']
+let urlsToCache = [...assets,
+    './',
+    'https://fonts.googleapis.com/icon?family=Material+Icons']
 
 urlsToCache = urlsToCache.map(path => {
     return new URL(path, global.location).toString()
