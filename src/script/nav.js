@@ -1,4 +1,4 @@
-import {getAllStandings, getAllTeams} from "./api/data"
+import {getAllStandings, getAllTeams} from "./api/api-repo"
 
 const nav = () => {
     document.addEventListener("DOMContentLoaded", function () {

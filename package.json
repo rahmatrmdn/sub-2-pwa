@@ -29,6 +29,7 @@
     "webpack-pwa-manifest": "^4.2.0"
   },
   "dependencies": {
+    "idb": "^5.0.4",
     "materialize-css": "^1.0.0",
     "regenerator-runtime": "^0.13.5"
   }
