@@ -1,3 +1,5 @@
+import {dbIsFavorite} from "../local/db-repo";
+
 export function showStanding(data) {
     let standings = "";
     let standingElement = document.getElementById("homeStandings");
@@ -46,32 +48,40 @@ export function showStanding(data) {
 
 export function showTeams(data) {
 
-    let teams = "";
+    let favBtnColor, teams = "";
     let teamElement = document.getElementById("teams");
 
     data.teams.forEach(function (team) {
-        teams += `
-             <div class="col s12 m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img class="center-block" src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Team Badge" 
-                                style="width: 300px; height: 300px"> 
-                        <span class="card-title grey lighten-2 black-text" style="opacity:0.95">${team.name}</span>
-                        <a class="btn-floating halfway-fab waves-effect waves-light grey"><i
-                                class="material-icons">favorite</i></a>
-                    </div>
-                    <div class="card-content">
-                        <p>Located in ${team.address}, ${team.shortName} was founded on ${team.founded}. The avenue name is ${team.venue}</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="${team.website}" target="_blank">Website</a>
+
+        dbIsFavorite(team.id).then(fav => {
+
+            if (fav) favBtnColor = "red"
+            else favBtnColor = "grey"
+
+            teams += `
+                 <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-image">
+                            <img class="center-block" src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Team Badge" 
+                                    style="width: 300px; height: 300px"> 
+                            <span class="card-title grey lighten-2 black-text" style="opacity:0.95">${team.name}</span>
+                            <a class="btn-floating halfway-fab waves-effect waves-light ${favBtnColor} favoriteButton" id="${team.id}"><i
+                                    class="material-icons">favorite</i></a>
+                        </div>
+                        <div class="card-content">
+                            <p>Located in ${team.address}, ${team.shortName} was founded on ${team.founded}. The avenue name is ${team.venue}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="${team.website}" target="_blank">Website</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-    });
+            `;
 
-    teamElement.innerHTML = teams;
+            teamElement.innerHTML = teams;
+        })
+    })
+
 }
 
 

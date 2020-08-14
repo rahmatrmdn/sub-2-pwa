@@ -1,14 +1,21 @@
 import {dbDeleteFavorite, dbGetAllFavTeam, dbInsertFavorite} from "./local/db-repo"
+import {loadPage} from "./nav";
 
-document.addEventListener("DOMContentLoaded", function () {
+const favorite = () => {
+    document.addEventListener("DOMContentLoaded", function () {
 
-    let removeButtons = document.querySelectorAll(".removeButton");
-    for(let button of removeButtons) {
-        button.addEventListener("click", function (event) {
-            let bookId = event.target.id;
-            dbDeleteBook(bookId).then(() => {
-                showAllBook()
+        let favoriteButtons = document.querySelectorAll(".favoriteButton");
+        for(let button of favoriteButtons) {
+            button.addEventListener("click", function (event) {
+                window.alert('fav clicked')
+                let teamId = event.target.id;
+                dbInsertFavorite(teamId).then(() => {
+                    loadPage()
+                })
             })
-        })
-    }
-})
+        }
+
+    })
+}
+
+export default favorite
