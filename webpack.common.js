@@ -48,6 +48,11 @@ module.exports = {
             template: './src/pages/teams.html',
             chunks: ['noEntry']
         }),
+        new HtmlWebpackPlugin({
+            filename: '/pages/welcome.html',
+            template: './src/pages/welcome.html',
+            chunks: ['noEntry']
+        }),
         new WebpackPwaManifest({
             "name": "Football Pocket",
             "short_name": "FPocket",

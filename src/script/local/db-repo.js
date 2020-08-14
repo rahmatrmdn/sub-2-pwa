@@ -19,14 +19,13 @@ export function dbGetAllFavTeam() {
             if (data !== undefined) {
                 resolve(data)
             } else {
-                reject(new Error("Favorite not Found"))
+                reject(new Error("Favorite undefined!"))
             }
         })
     })
 }
 
 export function dbInsertFavorite(team) {
-    console.log(team);
     return new Promise((resolve) => {
         idbPromised.then(db => {
             const transaction = db.transaction("fav_team", `readwrite`);

@@ -96,5 +96,11 @@ export function showTeams(data) {
     })
 }
 
+export function showNoFav() {
+
+    document.getElementById("teams").innerHTML = `
+        <h6 class="center header col s12 light">You haven't chosen your favorite team</h6>      
+    `;
+}
 
 

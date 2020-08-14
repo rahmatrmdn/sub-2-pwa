@@ -1,4 +1,4 @@
-import {dbDeleteFavorite, dbGetAllFavTeam, dbInsertFavorite} from "./local/db-repo"
+import {dbDeleteFavorite, dbInsertFavorite} from "./local/db-repo"
 import {loadPage} from "./nav";
 
 export function favoriteCondition() {
@@ -23,13 +23,11 @@ export function favoriteCondition() {
 
             if (isFav === "true") {
                 dbDeleteFavorite(team.id).then(() => {
-                    let page = window.location.hash.substr(1);
-                    loadPage(page)
+                    refreshPage()
                 })
             } else {
                 dbInsertFavorite(team).then(() => {
-                    let page = window.location.hash.substr(1);
-                    loadPage(page)
+                    refreshPage()
                 })
             }
 
@@ -37,3 +35,8 @@ export function favoriteCondition() {
     }
 }
 
+const refreshPage = () => {
+    let page = window.location.hash.substr(1);
+    if (page === "") page = "welcome";
+    loadPage(page)
+}
