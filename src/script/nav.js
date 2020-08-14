@@ -2,7 +2,6 @@ import {getAllStandings, getAllTeams} from "./api/api-repo"
 
 const nav = () => {
     document.addEventListener("DOMContentLoaded", function () {
-        console.log('document loaded')
         let page;
         // Activate sidebar nav
         const elems = document.querySelectorAll(".sidenav");

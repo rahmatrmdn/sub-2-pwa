@@ -1,4 +1,5 @@
 import {showStanding, showTeams} from "./dom"
+import {favoriteCondition} from "../favorite";
 
 const API_KEY = "16d85bf702974259b17e4dff4faeade4";
 const BASE_URL = "https://api.football-data.org/v2/";
@@ -34,7 +35,7 @@ export function getAllTeams() {
         caches.match(ENDPOINT_TEAMS).then(function (response) {
             if (response) {
                 response.json().then(function (data) {
-                    showTeams(data);
+                    showTeams(data)
                 })
             }
         })

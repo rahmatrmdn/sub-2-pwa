@@ -1,4 +1,5 @@
 import {dbIsFavorite} from "../local/db-repo";
+import {favoriteCondition} from "../favorite";
 
 export function showStanding(data) {
     let standings = "";
@@ -79,9 +80,10 @@ export function showTeams(data) {
             `;
 
             teamElement.innerHTML = teams;
+
+            favoriteCondition();
         })
     })
-
 }
 
 

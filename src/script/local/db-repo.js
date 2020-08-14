@@ -24,6 +24,7 @@ export function dbGetAllFavTeam() {
 }
 
 export function dbInsertFavorite(team) {
+    console.log(team);
     return new Promise((resolve, reject) => {
         idbPromised.then(db => {
             const transaction = db.transaction("fav_team", `readwrite`);
