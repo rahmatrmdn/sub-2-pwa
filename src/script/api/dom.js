@@ -60,14 +60,24 @@ export function showTeams(data) {
             else favBtnColor = "grey"
 
             teams += `
-                 <div class="col s12 m4">
+                 <div class="col s12 m4"> 
                     <div class="card">
                         <div class="card-image">
                             <img class="center-block" src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Team Badge" 
                                     style="width: 300px; height: 300px"> 
                             <span class="card-title grey lighten-2 black-text" style="opacity:0.95">${team.name}</span>
-                            <a class="btn-floating halfway-fab waves-effect waves-light ${favBtnColor} favoriteButton" id="${team.id}"><i
-                                    class="material-icons">favorite</i></a>
+                            <a class="btn-floating halfway-fab waves-effect waves-light ${favBtnColor} favoriteButton" 
+                               data-team-isFav="${fav}"
+                               data-team-id="${team.id}"
+                               data-team-name="${team.name}"
+                               data-team-shortName="${team.shortName}"
+                               data-team-crestUrl="${team.crestUrl}"
+                               data-team-address="${team.address}"
+                               data-team-founded="${team.founded}"
+                               data-team-venue="${team.venue}"
+                               data-team-website="${team.website}">
+                               <i class="material-icons">favorite</i>
+                            </a>
                         </div>
                         <div class="card-content">
                             <p>Located in ${team.address}, ${team.shortName} was founded on ${team.founded}. The avenue name is ${team.venue}</p>

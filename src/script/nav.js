@@ -39,7 +39,7 @@ const nav = () => {
 
         // Load pages content
         page = window.location.hash.substr(1);
-        if (page === "") page = "standing";
+        if (page === "") page = "teams";
         loadPage(page);
 
     });

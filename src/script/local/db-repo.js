@@ -12,7 +12,9 @@ export function dbGetAllFavTeam() {
     return new Promise((resolve, reject) => {
         idbPromised.then(db => {
             const transaction = db.transaction("fav_team", `readonly`);
-            return transaction.objectStore("fav_team").getAll();
+            const data = transaction.objectStore("fav_team").getAll();
+            transaction.done;
+            return data;
         }).then(data => {
             if (data !== undefined) {
                 resolve(data)
@@ -25,45 +27,36 @@ export function dbGetAllFavTeam() {
 
 export function dbInsertFavorite(team) {
     console.log(team);
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         idbPromised.then(db => {
             const transaction = db.transaction("fav_team", `readwrite`);
             transaction.objectStore("fav_team").add(team);
-            return transaction;
-        }).then(transaction => {
-            if (transaction.complete) {
-                resolve(true)
-            } else {
-                reject(new Error(transaction.onerror))
-            }
+            transaction.done;
+            resolve(true)
         })
     })
 }
 
 export function dbDeleteFavorite(teamId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         idbPromised.then(db => {
             const transaction = db.transaction("fav_team", `readwrite`);
-            transaction.objectStore("fav_team").delete(teamId);
-            return transaction;
-        }).then(transaction => {
-            if (transaction.complete) {
-                resolve(true)
-            } else {
-                reject(new Error(transaction.onerror))
-            }
+            transaction.objectStore("fav_team").delete(teamId.toString());
+            transaction.done;
+            resolve(true)
         })
     })
 }
 
-export function dbIsFavorite (teamId) {
+export function dbIsFavorite(teamId) {
     return new Promise((resolve) => {
         idbPromised.then(db => {
             const transaction = db.transaction("fav_team", `readonly`);
-            transaction.objectStore("fav_team").get(teamId);
-            return transaction;
-        }).then(transaction => {
-            if (transaction.complete) {
+            const data = transaction.objectStore("fav_team").get(teamId.toString());
+            transaction.done;
+            return data;
+        }).then(data => {
+            if (data) {
                 resolve(true)
             } else {
                 resolve(false)

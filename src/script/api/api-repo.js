@@ -1,5 +1,4 @@
 import {showStanding, showTeams} from "./dom"
-import {favoriteCondition} from "../favorite";
 
 const API_KEY = "16d85bf702974259b17e4dff4faeade4";
 const BASE_URL = "https://api.football-data.org/v2/";
