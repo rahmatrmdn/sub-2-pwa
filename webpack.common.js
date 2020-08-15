@@ -39,17 +39,17 @@ module.exports = {
             chunks: ['noEntry']
         }),
         new HtmlWebpackPlugin({
-            filename: '/pages/standing.html',
+            filename: 'pages/standing.html',
             template: './src/pages/standing.html',
             chunks: ['noEntry']
         }),
         new HtmlWebpackPlugin({
-            filename: '/pages/teams.html',
+            filename: 'pages/teams.html',
             template: './src/pages/teams.html',
             chunks: ['noEntry']
         }),
         new HtmlWebpackPlugin({
-            filename: '/pages/welcome.html',
+            filename: 'pages/welcome.html',
             template: './src/pages/welcome.html',
             chunks: ['noEntry']
         }),
