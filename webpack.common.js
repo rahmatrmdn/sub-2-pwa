@@ -55,6 +55,7 @@ module.exports = {
         }),
         new WebpackPwaManifest({
             "name": "Football Pocket",
+            "gcm_sender_id": "403108446847",
             "short_name": "FPocket",
             "description": "Free Football Apps",
             "start_url": ".",
