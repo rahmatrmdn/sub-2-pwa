@@ -11,7 +11,8 @@ if (DEV) {
 
 let urlsToCache = [...assets,
     './',
-    'https://fonts.googleapis.com/icon?family=Material+Icons']
+    'https://fonts.googleapis.com/icon?family=Material+Icons',
+    'https://fonts.gstatic.com/s/materialicons/v54/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2']
 
 urlsToCache = urlsToCache.map(path => {
     return new URL(path, global.location).toString()

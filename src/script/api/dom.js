@@ -60,12 +60,9 @@ export function showTeams(data) {
             else favBtnColor = "grey"
 
             teams += `
-                 <div class="col s12 m4"> 
+                 <div class="col s12 m6 l4"> 
                     <div class="card">
                         <div class="card-image">
-                            <img class="center-block" src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Team Badge" 
-                                    style="width: 300px; height: 300px"> 
-                            <span class="card-title grey lighten-2 black-text" style="opacity:0.95">${team.name}</span>
                             <a class="btn-floating halfway-fab waves-effect waves-light ${favBtnColor} favoriteButton" 
                                data-team-isFav="${fav}"
                                data-team-id="${team.id}"
@@ -78,9 +75,12 @@ export function showTeams(data) {
                                data-team-website="${team.website}">
                                <i class="material-icons">favorite</i>
                             </a>
+                            <img class="center-block responsive-img" src="${team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Team Badge" 
+                                    style="width: 300px; height: 300px"> 
+                            <span class="card-title grey lighten-2 black-text" style="opacity:0.95">${team.name}</span>
                         </div>
-                        <div class="card-content">
-                            <p>Located in ${team.address}, ${team.shortName} was founded on ${team.founded}. The avenue name is ${team.venue}</p>
+                        <div class="card-content" style="height: 115px">
+                            <p>Located in ${team.address}, ${team.shortName} was founded on ${team.founded}. ${venueCondition(team.address, team.shortName, team.venue)}</p>
                         </div>
                         <div class="card-action">
                             <a href="${team.website}" target="_blank">Website</a>
@@ -101,6 +101,12 @@ export function showNoFav() {
     document.getElementById("teams").innerHTML = `
         <h6 class="center header col s12 light">You haven't chosen your favorite team</h6>      
     `;
+}
+
+const venueCondition = (address, sName, venue) => {
+
+    if (address.length + sName.length + venue.length > 60) return ""
+    else return `The venue name is ${venue}.`
 }
 
 
